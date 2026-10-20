@@ -26,13 +26,13 @@ int main() {
     }
     listen(serverSocket, SOMAXCONN); //2nd Argument -> max_queue
 
-    log("Ready to start serving requests on port 8080", log_type::info);
+    log("Ready to start serving requests on port: " + std::to_string(port), log_type::info);
     while (true) {
         int clientSocket = accept(serverSocket, nullptr, nullptr);
         if (clientSocket < 0) {
             continue;
         }
-        char buffer[1024] = {0};
+        char buffer[1024] = {0}; // A given request can be max 1 KB.
         size_t n = recv(clientSocket, buffer, sizeof(buffer), 0);
         if (n > 0) {
             buffer[n] = '\0';
