@@ -47,7 +47,14 @@ namespace {
     [[nodiscard]] std::tm get_local_time(std::time_t timestamp)
     {
         std::tm result{};
+
+        #if defined(_WIN32)
+        localtime_s(&result, &timestamp);
+        #endif
+
+        #if defined(__APPLE__) || defined(__linux__)
         localtime_r(&timestamp, &result);
+        #endif
 
         return result;
     }
