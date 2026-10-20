@@ -4,7 +4,8 @@
 #include <sys/socket.h>
 #include <csignal>
 #include <iostream>
-#include <string>
+#include <cstring>
+#include <cerrno>
 #include "log.h"
 
 using std::cout;
